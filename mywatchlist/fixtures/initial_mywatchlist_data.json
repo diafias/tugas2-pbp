@@ -1,0 +1,112 @@
+[
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":1,
+        "fields":{
+            "watched":true,
+            "title":"Your Lie In April",
+            "rating":"5",
+            "release_date":"2014-10-10",
+            "review":"bagus, membuat saya terharu, anime nya menceritakan tentang kisah cinta antara pemain piano dan biola" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":2,
+        "fields":{
+            "watched":true,
+            "title":"Kimi No Nawa",
+            "rating":"5",
+            "release_date":"2016-12-07",
+            "review":"Ceritanya keren, tentang perjalanan waktu dan kisah cinta" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":3,
+        "fields":{
+            "watched":true,
+            "title":"Tenki No Ko",
+            "rating":"5",
+            "release_date":"2019-08-21",
+            "review":"Cerita tentang pemuda yang bisa mengendalikan cuaca hujan dan keren sekali" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":4,
+        "fields":{
+            "watched":true,
+            "title":"I want to eat your pancreas",
+            "rating":"5",
+            "release_date":"2018-09-01",
+            "review":"Alur ceritanya sedih karena kekasih pacarnya meninggal dunia karena penyakit" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":5,
+        "fields":{
+            "watched":true,
+            "title":"Swort Art Online",
+            "rating":"4",
+            "release_date":"2012-07-07",
+            "review":"Menceritakan pemuda yang bisa masuk ke dunia game" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":6,
+        "fields":{
+            "watched":true,
+            "title":"Jujutsu Kaisen",
+            "rating":"5",
+            "release_date":"2022-03-16",
+            "review":"Cerita sekumpulan murid perburuan iblis di dunia penyihir" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":7,
+        "fields":{
+            "watched":true,
+            "title":"Kaguya-sama : Love Is War",
+            "rating":"5",
+            "release_date":"2019-09-06",
+            "review":"Kisah percintaan antara ketua osis dan wakil ketua osis yang sangat gengsi untuk mengungkapkan perasaannya"
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":8,
+        "fields":{
+            "watched":true,
+            "title":"Naruto Shippuden",
+            "rating":"5",
+            "release_date":"2007-02-15",
+            "review":"Cerita tentang dunia ninja dalam menghadapi musuh" 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":9,
+        "fields":{
+            "watched":true,
+            "title":"Kimetsu No Yaeba",
+            "rating":"5",
+            "release_date":"2021-01-06",
+            "review":"Cerita tentang anak muda yang mendapatkan kekuatan " 
+        }
+    },
+    {
+        "model":"mywatchlist.MyWatchList",
+        "pk":10,
+        "fields":{
+            "watched":true,
+            "title":"Rascal Does Not Dream Of Bunny Girl Senpai",
+            "rating":"5",
+            "release_date":"2019-05-25",
+            "review":"Jalan ceritanya menarik, terdapat seorang cewek yang bisa berubah menjadi kelinci" 
+        }
+    }
+]
