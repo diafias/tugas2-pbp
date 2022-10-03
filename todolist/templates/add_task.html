@@ -6,37 +6,39 @@
 
 {% block content %}
 
-<div class = "login">
 
-    <h1>Add Task</h1>
+<div class="container" style="width:320px; padding-top:50px;">
+    <div class="card" style="width: 20rem; ">
+        <h1 style="text-align:center; font: bold 23px/1 sans-serif;">ADD TASK</h1>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Title: </td>
-                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Description: </td>
-                <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
-            </tr>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Title: </td>
+                    <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+                </tr>
+                        
+                <tr>
+                    <td>Description: </td>
+                    <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
+                </tr>
 
-            <tr>
-                <td></td>
-                <td><input class="btn add_task_btn" type="submit" value="Add"></td>
-            </tr>
-        </table>
-    </form>
+                <tr>
+                    <td></td>
+                    <td><input class="btn add_task_btn" type="submit" value="Add"></td>
+                </tr>
+            </table>
+        </form>
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %} 
+    </div>    
 </div>
 
 {% endblock content %}

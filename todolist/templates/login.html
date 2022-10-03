@@ -6,29 +6,27 @@
 
 {% block content %}
 
-<div class = "login">
+<div class="container" style="width:320px; padding-top:50px;">
+    <div class="card" style="width: 20rem; ">
+        <h1 style="text-align:center; font: bold 23px/1 sans-serif;">LOGIN</h1>
 
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label style="padding-top: 10px">Username</label>
+                <input type="text" name="username" placeholder="Username" size="40" class="form-control">
+            </div>
                     
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+            <div class="form-group">
+                <label style="padding-top: 10px">Password</label>
+                <input type="password" name="password" placeholder="Password" size="40" class="form-control">
+            </div>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+            <div style="text-align:center">
+                <button class="btn btn-primary" type="submit" style="margin-top: 10px"> Login </button>
+            </div>
+        </form>
+    </div>
 
     {% if messages %}
         <ul>
@@ -38,8 +36,9 @@
         </ul>
     {% endif %}     
         
-    <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
+    <div class="text-center" style="font: bold 24px/1 sans-serif;">
+        <h6 style="font: bold 15px/1 sans-serif; padding-top:10px; text-align:center;">Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a></h6>
+    </div>
 </div>
 
 {% endblock content %}

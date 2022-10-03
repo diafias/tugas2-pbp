@@ -1,14 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Username : </h5>
-<p>{{request.user}}</p>
 
-<button><a href="{% url 'todolist:add_task' %}">Add Task</a></button>
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+<nav class="navbar" style="background-color: #696969;">
+    <div class="m-3 d-flex flex-column justify-content-between align-items-center">
+        <h5 class="text-black" style="font: bold 24px/1 sans-serif; background-color: #d3d3d3; border-radius: 10px; padding:10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">username : </h5>
+        <h5 class="text-white">{{request.user}}</h5>
+    </div>
+</nav>
 
-<table>
-    <tr>
+<div class="m-3 d-flex flex-row justify-content-between">
+    <button type="button" class="btn btn-dark" style="background-color: #f1f1f1;"><a class="text-black text-decoration-none;" href="{% url 'todolist:add_task' %}">Add Task</a></button>
+    <button type="button" class="btn btn-dark" style="background-color: #f1f1f1;"><a class="text-black text-decoration-none;" href="{% url 'todolist:logout' %}">Logout</a></button>
+</div>
+
+<div class="container" style="padding : 20px;">
+    <div class="row">
+    {% for task in task_list %}
+        <div class="column">
+            <div class="card" style="width: 18rem; ">
+                <div class="card-header" style="border-radius: 25px;">
+                    <h5 class="card-title" style="background-color: #f5fffa; border-radius: 25px; font-weight: bold;">{{task.title}}</h5>
+                </div>
+                <p>{{task.description}}</p>
+                <p>{{task.date}}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% comment %}
+<table class="table table-striped table-bordered">
+    <tr class="table-dark">
         <th>Title</th>
         <th>Description</th>
         <th>Date Created</th>
@@ -21,5 +45,6 @@
         </tr>
     {% endfor %}
 </table>
+{% endcomment %}
 
 {% endblock content %}

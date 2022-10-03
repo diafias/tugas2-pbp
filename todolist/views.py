@@ -55,7 +55,7 @@ def add_task(request):
         if task_form.is_valid():
             task_form.instance.user = request.user
             task_form.save()
-            messages.success(request, 'Akun telah berhasil dibuat')
+            messages.success(request, 'Task berhasil ditambahkan :)')
             return redirect ('todolist:show_todolist')
     context = {
         'task_list ':'task_todolist',
