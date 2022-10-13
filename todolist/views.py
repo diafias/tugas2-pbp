@@ -9,6 +9,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from todolist.forms import Input_Form
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -61,3 +64,39 @@ def add_task(request):
         'task_list ':'task_todolist',
     }
     return render(request, 'add_task.html', context)
+
+@login_required(login_url='/todolist/login/')
+@csrf_exempt
+def update(request, id):
+    item = Task.objects.get(pk=id)
+    finished = not item.is_finished
+    item.is_finished = finished
+    item.save()
+    return JsonResponse({"is_finished": finished})
+    
+@login_required(login_url='/todolist/login/')
+@csrf_exempt
+def delete_todolist(request, id):
+    todolist = Task.objects.get(pk=id)
+    todolist.delete()
+    return redirect('todolist:show_todolist')
+
+def todolist_json(request):
+    data = Task.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@login_required(login_url='/todolist/login/')
+@csrf_exempt
+def create_task_ajax(request):
+    if request.method == "POST":
+        user = request.user
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        create_new_task = Task(user=user, title=title, description=description)
+        create_new_task.save()
+
+        return JsonResponse({"pk" : create_new_task.pk, "fields": {
+            "date" : create_new_task.date,
+            "title" : create_new_task.title,
+            "description" : create_new_task.description,
+        }})

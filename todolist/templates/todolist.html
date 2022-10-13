@@ -1,5 +1,77 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $.get(window.location.href + "json/", function (data) {
+      for (idx = 0; idx < data.length; idx++) {
+        getData(data[idx]);
+        deleteData(data[idx]);
+        updateStatus(data[idx]);
+      }
+    });
+
+    function getData(data) {
+      $("#container").append(
+        `
+        <div id="${data.pk}-card" class="column">
+            <div class="card" style="width: 18rem; ">
+                <div class="card-header" style="border-radius: 25px;">
+                <h5 class="card-title" style="background-color: #f5fffa; border-radius: 25px; font-weight: bold;">${data.fields.title}</h5>
+                </div>
+                <p>${data.fields.description}</p>
+                <p>${data.fields.date}</p>
+                <p id="${data.pk}-status">${data.fields.is_finished ? "selesai": "belum selesai"}</p>
+                <a id="${data.pk}-update" class="btn btn-success"> Update Status </a>
+                <a id="${data.pk}-delete" class="btn btn-success"> delete </a>
+            </div>
+        </div>   
+                `
+      );
+    }
+
+    $("#create-new").submit(function (e) {
+        e.preventDefault();
+        $.post(window.location.href + "create-task-ajax/", {
+          title: $("#title").val(),
+          description: $("#description").val(),
+        }).done(function (data) {
+          getData(data);
+          deleteData(data);
+          updateStatus(data);
+          $("#title").val(""), $("#description").val("");
+          const sectionCards = document.getElementById("container");
+          sectionCards.insertAdjacentHTML("beforestart", $(`#${data.pk}-card`));
+        });
+      });
+
+    function updateStatus(data) {
+      $(`#${data.pk}-update`).click(function () {
+        $.post(window.location.href + `update/${data.pk}/`, {}).done(
+          (res) => {
+            const statusTodolist = res.is_finished
+              ? "selesai"
+              : "belum selesai";
+            $(`#${data.pk}-status`).text(statusTodolist);
+          }
+        );
+      });
+    }
+
+    function deleteData(data) {
+      $(`#${data.pk}-delete`).click(function () {
+        $.post(window.location.href + `delete/${data.pk}/`, {}).done(
+          (res) => {
+            $(`#${data.pk}-card`).fadeOut();
+          }
+        );
+      });
+    }
+  });
+</script>
+{% endblock meta %}
+ 
 {% block content %}
 
 <nav class="navbar">
@@ -11,26 +83,48 @@
 
 <div class="m-3 d-flex flex-row justify-content-between">
     <div class="button">
-        <button type="button" class="btn btn-dark"><a class="text-white text-decoration:none;" href="{% url 'todolist:add_task' %}">Add Task</a></button>
-    </div>
-    <div class="button">
         <button type="button" class="btn btn-dark"><a class="text-white text-decoration:none;" href="{% url 'todolist:logout' %}">Logout</a></button>
     </div>
 </div>
 
 <div class="container" style="padding : 20px;">
-    <div class="row">
-    {% for task in task_list %}
-        <div class="column">
+    <div id="container" class="row">
+   
+        <!-- <div class="column">
             <div class="card" style="width: 18rem; ">
                 <div class="card-header" style="border-radius: 25px;">
-                    <h5 class="card-title" style="background-color: #f5fffa; border-radius: 25px; font-weight: bold;">{{task.title}}</h5>
+                <h5 class="card-title" style="background-color: #f5fffa; border-radius: 25px; font-weight: bold;">{{task.title}}</h5>
                 </div>
                 <p>{{task.description}}</p>
                 <p>{{task.date}}</p>
+                <p>{{task.is_finished}}</p>
             </div>
-        </div>
-    {% endfor %}
+        </div> -->
+    
+    </div>
+</div>
+
+<div class="m-3 d-flex flex-row justify-content-between"></div>
+    <div class="card" style="width: 18rem; ">
+    <form id="create-new" method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr> </tr>
+            <tr>
+                <td>Title: </td>
+                <td><input id="title" type="text" name="title" placeholder="Title" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Description: </td>
+                <td><input id="description" type="text" name="description" placeholder="Description" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td><input class="btn add_task_btn" type="submit" value="Add"></td>
+            </tr>
+        </table>
+    </form>
     </div>
 </div>
 
